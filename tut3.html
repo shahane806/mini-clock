@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="javascriptreact">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock</title>
+</head>
+<style>
+    #clock{
+        height:15rem;
+        width:15rem;
+        align-items: center;
+        justify-content: center;
+        
+        background-color: rgba(13, 14, 13, 0.795);
+    }
+    #clockbuttons{
+        height:35px;
+        width:inherit;
+        margin:auto;
+        align-items: center;
+        background-color: rgba(23, 23, 48, 0.826);
+        position:absolute;
+        
+    }
+    #clockpannel{
+        background-color: rgba(0, 0, 0, 0.795);
+        height:11rem;
+        width: inherit;
+        position: relative;
+        margin-top: 13px;
+    }
+    #clockDisplay{
+        margin:auto;
+        display: flex;
+        height:inherit;
+        margin:33px;
+        text-align: center;
+        align-items: center;
+        justify-content:center;
+        background-color: rgb(16, 14, 18);
+        position: relative;
+        
+    }
+    #clockDisplayTime{
+        color: rgb(177, 21, 21);
+       
+       
+    }
+    #snooze,#off,#on,#setAlarm{
+        background-color: rgb(62, 54, 44);
+        color: red;
+        border-radius: 3px solid grey;
+        margin:auto;
+        margin-left:20px;
+        align-items: center;
+        height:inherit;
+        width: max-content;
+
+        justify-content: center;
+        padding:3px;
+    }
+    #notification{
+        height: inherit;
+        width: fit-content;
+        color:red;
+
+    }
+
+</style>
+<body>
+    <div id="clock">
+    <div id="clockbuttons">
+        
+    </div>
+    
+</div>
+</body>
+<script>
+   let st =  setInterval(clockTime,1000);
+    document.getElementById("clockbuttons").innerHTML = ` <button id="snooze" onclick="snooze()">Snooze</button>
+    <button id="off" onclick="off()" value = "0">Off</button>
+    <button id="setAlarm" onclick="setAlarm()">Alarm</button>
+    <div id="clockpannel">
+        <div id="clockDisplay">
+            <p id="notification"><p>
+            <h2 id="clockDisplayTime"></h2>
+        </div>
+    </div>   `;
+    document.getElementById("notification").innerHTML = "ON";
+    function clockTime()
+    {
+
+    
+    let date = new Date();
+        if(date.getHours()==12)
+        {
+            document.getElementById("clockDisplayTime").innerHTML = `${date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+" "+"AM"}`;
+        }
+        else
+        {
+            document.getElementById("clockDisplayTime").innerHTML = `${date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+" "+"PM"}`;
+        }
+ 
+      
+   
+    }
+    function off()
+    {
+        
+    
+        document.getElementById("clockbuttons").innerHTML = ` <button id="snooze" onclick="snooze()">Snooze</button>
+        <button id="on" onclick="on()" value = "1">On</button>
+        <button id="setAlarm" onclick="setAlarm()">Alarm</button>
+        <div id="clockpannel">
+            <div id="clockDisplay">
+                <p id="notification"><p>
+                <h2 id="clockDisplayTime"></h2>
+            </div>
+        </div>   `;
+        document.getElementById("notification").innerHTML = "OFF";
+        clearInterval(st);
+        clearTimeout(st);
+    }
+    function on()
+    {
+         st =  setInterval(clockTime,1000);
+        document.getElementById("clockbuttons").innerHTML = ` <button id="snooze" onclick="snooze()">Snooze</button>
+        <button id="off" onclick="off()" value = "0">Off</button>
+        <button id="setAlarm" onclick="setAlarm()">Alarm</button>
+        <div id="clockpannel">
+           
+            <div id="clockDisplay">
+                <p id="notification"><p>
+                <h2 id="clockDisplayTime"></h2>
+            </div>
+        </div>   `;
+        document.getElementById("notification").innerHTML = "ON";
+    }
+    function setAlarm()
+    {
+        document.getElementById("clockDisplayTime").innerHTML = ``;
+    }
+</script>
+</html>
